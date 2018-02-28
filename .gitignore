@@ -6,3 +6,5 @@ package-lock.json
 
 dist
 build
+
+app/core/models/config.ts
