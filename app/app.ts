@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express, { Request, Response, NextFunction, Errback } from 'express'
 import path from 'path'
 // import favicon  from 'serve-favicon'
 import logger from 'morgan'
@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 
 import routes from './routes/route'
+import { webServer } from './config/config'
 
 const app = express()
 
@@ -20,13 +21,14 @@ app.use(cookieParser())
 // app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Origin', `${webServer}`)
     // 不限制访问源
     res.header(
         'Access-Control-Allow-Headers',
         'Content-Type, Access-Control-Allow-Headers, Authorization X-Requested-With'
     )
     res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+    res.header('Access-Control-Allow-Credentials', 'true')
     // 接收访问方法
     res.header('X-Powered-By', ' 3.2.1')
     res.header('Content-Type', 'application/json;charset=utf-8')

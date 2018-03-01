@@ -1,10 +1,11 @@
+import { Request, Response, NextFunction } from 'express'
 import { get, post } from '../core/decorator/controller'
 import { encrypt } from '../utils/md5'
 import sql from '../core/models/sequelize'
 
 class Login {
     @post('/login')
-    async login(req, res) {
+    async login(req: Request, res: Response) {
         let errorcode = 0,
             token = ''
         const { username, password } = req.body
@@ -24,9 +25,8 @@ class Login {
                 token = hash
             }
         }
-        console.log('result', result)
 
-        res.json({ data: { token, errorcode } })
+        res.json({ token, errorcode })
     }
 }
 

@@ -1,3 +1,3 @@
-// const isDev = process.NODE_ENV != 'production' ? true : false
+const isDev = process.NODE_ENV != 'production' ? true : false
 
-// export default isDev
+export default isDev
