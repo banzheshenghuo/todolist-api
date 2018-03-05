@@ -1,9 +1,13 @@
-import { get } from '../core/decorator/controller'
+import { Request, Response } from 'express'
+
+import sql from '../core/models/sequelize'
+import { get, post } from '../core/decorator/controller'
 
 class Home {
-    @get('/home')
-    async home(req, res) {
-        console.log('userId', req.user)
+    @post('/home')
+    async home(req: Request, res: Response) {
+        const { navigator } = req.body
+        console.log('navigator', req.user)
         res.json({ user: 'home' })
     }
 }

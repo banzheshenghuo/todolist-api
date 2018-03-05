@@ -30,7 +30,7 @@ function routers(app: Express) {
                             )
 
                             if (user.status) {
-                                req.user = user
+                                req = Object.assign(req, { user })
                                 await handler(req, res)
                             } else {
                                 throw new Error('cookie is not found')
