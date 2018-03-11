@@ -13,7 +13,6 @@ function routers(app: Express) {
             const path = module.path
             const method = module.method
             const handler = module.handler
-
             app.use(
                 '/',
                 router[method](path, async function(req: Request, res: Response) {

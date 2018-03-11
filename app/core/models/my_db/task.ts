@@ -1,6 +1,6 @@
 import sequelize, { Sequelize } from 'sequelize'
 
-export default (sql: Sequelize) => {
+export default sql => {
     return sql.define(
         'task',
         {
