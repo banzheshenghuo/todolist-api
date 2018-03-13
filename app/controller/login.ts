@@ -25,8 +25,8 @@ class Login {
                 token = hash
             }
         }
-
-        res.json({ token, errorcode })
+        console.log('result===>', token, errorcode)
+        return res.json({ token, errorcode })
     }
 }
 

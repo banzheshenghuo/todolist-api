@@ -1,9 +1,8 @@
 import { get, post } from '../core/decorator/controller'
 import { encrypt } from '../utils/md5'
-import sql from '../core/models/sequelize'
-import { task } from '../core/models/my_db'
+import SequelizeAction from '../core/sqlAction'
 
-class Login {
+class Todolist {
     @get('/todolist')
     async todolist(req: Request, res: Response) {
         // let errorcode = 0,
@@ -30,24 +29,11 @@ class Login {
         res.json({ errorcode: 0 })
     }
 
-    @get('/addtask')
-    async addtask(req: Request, res: Response) {
-        task(sql)
-            .create({
-                title: '第一次',
-                status: 1,
-                update_time: '123',
-                detail: '不多说',
-                label: '标签'
-            })
-            .then(m => {
-                console.log('insert article succes', m)
-            })
-            .catch((err: Error) => {
-                console.log('insert article faild', err)
-            })
-        res.json({ errorcode: 0 })
+    @post('/modifyTask')
+    async modify(req: Request, res: Response) {
+        console.log('res=====>', res)
+        res.json({ user: 'home' })
     }
 }
 
-export default Login
+export default Todolist
