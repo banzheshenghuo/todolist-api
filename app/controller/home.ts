@@ -6,9 +6,14 @@ import { get, post } from '../core/decorator/controller'
 class Home {
     @post('/home')
     async home(req: Request, res: Response) {
-        const { navigator } = req.body
-        console.log('navigator', req.user)
-        res.json({ user: 'home' })
+        const { date, category } = req.body
+        const selectDate = date ? `and date = '${date}'` : ''
+        const selectCategory = category ? `and category = '${category}'` : ''
+
+        const query = `select * from task where id is not null ${selectDate} ${selectCategory}`
+        const [resultData] = await sql.query(query)
+
+        res.json(resultData)
     }
 }
 
