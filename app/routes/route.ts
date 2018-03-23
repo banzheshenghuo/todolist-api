@@ -25,7 +25,7 @@ function routers(app: Express) {
                         }
                         if (_AT) {
                             const user = await sql.find(
-                                `select count(*) as status, id from user where password_hashed = '${_AT}'`
+                                `select count(*) as status, id from user where password_hashed = '${_USER_AT}'`
                             )
 
                             if (user.status) {
