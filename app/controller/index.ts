@@ -1,5 +1,5 @@
 import Home from './home'
 import Login from './login'
-import List from './list'
+import task from './task'
 
-export { Home, Login, List }
+export { Home, Login, task }

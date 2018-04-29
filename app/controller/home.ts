@@ -4,17 +4,22 @@ import sql from '../core/models/sequelize'
 import { get, post } from '../core/decorator/controller'
 
 class Home {
-    @post('/home')
-    async home(req: Request, res: Response) {
-        const { date, category } = req.body
-        const selectDate = date ? `and date = '${date}'` : ''
-        const selectCategory = category ? `and category = '${category}'` : ''
+  @post('/home')
+  async home(req: Request, res: Response) {
+    const { date, category } = req.body
+    const selectDate = date ? `and date = '${date}'` : ''
+    const selectCategory = category ? `and category = '${category}'` : ''
 
-        const query = `select * from task where id is not null ${selectDate} ${selectCategory}`
-        const [resultData] = await sql.query(query)
+    const query = `select id, status, title, label, category, date from task where id is not null ${selectDate} ${selectCategory}`
 
-        res.json(resultData)
+    try {
+      const [resultData] = await sql.query(query)
+      res.resultOk(resultData)
+    } catch (e) {
+      console.log('home request error', e)
+      res.resultError('error')
     }
+  }
 }
 
 export default Home
