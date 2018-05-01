@@ -1,32 +1,24 @@
+import { Request, Response } from 'express'
 import { get, post } from '../core/decorator/controller'
 import { encrypt } from '../utils/md5'
 import SequelizeAction from '../core/sqlAction'
+import sql from '../core/models/sequelize'
 
 class task {
-  @get('/getTask')
+  @post('/getTask')
   async getTask(req: Request, res: Response) {
-    // let errorcode = 0,
-    //     token = ''
-    // const { username, password } = req.body
+    const { id } = req.body
+    try {
+      const result = await sql.find(`select id,title,detail from task where id = ${id}`)
 
-    // const query = `select count(*) as status,password_hashed from user where login_name = '${username}' `
-    // const result = await sql.find(query)
-
-    // if (result.status == 0) {
-    //     // *不存在的用户
-    //     errorcode = 1
-    // } else {
-    //     let hash = encrypt(password)
-    //     if (result.password_hashed !== hash) {
-    //         //* 密码错误
-    //         errorcode = 2
-    //     } else {
-    //         token = hash
-    //     }
-    // }
-    // console.log('result', result)
-
-    res.json({ errorcode: 0 })
+      const resultData = {
+        title: 'xxx'
+      }
+      res.resultOk(resultData)
+    } catch (e) {
+      console.log('err====>', err)
+      res.resultError(resultData)
+    }
   }
 
   @post('/modifyTask')
